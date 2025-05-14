@@ -116,7 +116,7 @@ impl VisitMut for SimplifyExpr {
                             .exprs
                             .last()
                             .map(|v| &**v)
-                            .is_some_and(Expr::directness_matters)
+                            .map_or(false, Expr::directness_matters)
                         {
                             match seq.exprs.first().map(|v| &**v) {
                                 Some(Expr::Lit(..) | Expr::Ident(..)) => {}

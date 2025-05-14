@@ -15,12 +15,13 @@ pub extern crate swc_ecma_ast;
 use std::{borrow::Cow, hash::Hash, num::FpCategory, ops::Add};
 
 use number::ToJsString;
+use number::{JsNumber, ToJsString};
 use once_cell::sync::Lazy;
 use parallel::{Parallel, ParallelExt};
 use number::{JsNumber, ToJsString};
 use rustc_hash::{FxHashMap, FxHashSet};
 use swc_atoms::{atom, Atom};
-use swc_common::{util::take::Take, EqIgnoreSpan, Mark, Span, Spanned, SyntaxContext, DUMMY_SP};
+use swc_common::{util::take::Take, Mark, Span, Spanned, SyntaxContext, DUMMY_SP};
 use swc_ecma_ast::*;
 use swc_ecma_visit::{
     noop_visit_mut_type, noop_visit_type, visit_mut_obj_and_computed, visit_obj_and_computed,
