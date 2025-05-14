@@ -39,7 +39,7 @@ fn eval(module: &str, expr: &str) -> Option<String> {
             .unwrap()
         };
 
-        let mut evaluator = Evaluator::new(module_ast, marks);
+        let mut evaluator = Evaluator::new(Program::Module(module_ast), marks);
 
         let res = evaluator.eval(&expr_ast);
 
@@ -209,10 +209,10 @@ impl VisitMut for PartialInliner {
             }
         }
     }
-
-    fn visit_mut_module(&mut self, module: &mut Module) {
-        self.eval = Some(Evaluator::new(module.clone(), self.marks));
-        module.visit_mut_children_with(self);
+    
+    fn visit_mut_program(&mut self, program: &mut Program) {
+        self.eval = Some(Evaluator::new(program.clone(), self.marks));
+        program.visit_mut_children_with(self);
     }
 }
 

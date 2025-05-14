@@ -26,16 +26,16 @@ pub struct Evaluator {
 }
 
 impl Evaluator {
-    pub fn new(module: Module, marks: Marks) -> Self {
+    pub fn new(program: Program, marks: Marks) -> Self {
         Evaluator {
             expr_ctx: ExprCtx {
                 unresolved_ctxt: SyntaxContext::empty().apply_mark(marks.unresolved_mark),
                 is_unresolved_ref_safe: false,
-                in_strict: true,
+                in_strict: program.is_module(),
                 remaining_depth: 3,
             },
 
-            program: Program::Module(module),
+            program,
             marks,
             data: Default::default(),
             done: Default::default(),
