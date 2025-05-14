@@ -14,8 +14,6 @@ pub extern crate swc_ecma_ast;
 
 use std::{borrow::Cow, hash::Hash, num::FpCategory, ops::Add};
 
-use number::ToJsString;
-use number::{JsNumber, ToJsString};
 use once_cell::sync::Lazy;
 use parallel::{Parallel, ParallelExt};
 use number::{JsNumber, ToJsString};
