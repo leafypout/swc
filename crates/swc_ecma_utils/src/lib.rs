@@ -3282,6 +3282,20 @@ fn as_pure_string(expr: &Expr, ctx: ExprCtx) -> Value<Cow<'_, str>> {
             }
             Known(buf.into())
         }
+        Expr::Seq(SeqExpr {
+            exprs,
+            ..
+        }) => {
+            if exprs.iter().any(|expr| expr.may_have_side_effects(ctx)) {
+                return Unknown;
+            }
+            
+            let Some(last) = exprs.last() else {
+                return Unknown;
+            };
+            
+            last.as_pure_string(ctx)
+        }
         _ => Unknown,
     }
 }
